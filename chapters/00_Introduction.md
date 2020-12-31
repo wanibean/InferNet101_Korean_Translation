@@ -8,6 +8,7 @@
 <br>
 <br>
 <br>
+
 Version 1.2 – October 2018
 <br>
 <br>
@@ -46,6 +47,7 @@ Version 1.2 – October 2018
 ## 입문
 <br>
 <br>
+
 이 문서는 마이크로소프트 Infer.NET을 이용하여 확률론적 프로그램(probabilistic programs)을 다양한 예제를 통해 자세히 소개하고 있습니다. 
 만약 확률론적 프로그램이 생소하다면 참고자료 목록에 있는 'Infer.NET 입문' (An Introduction to Infer.NET)을 먼저 읽어보기를 권합니다. 'Infer.NET 입문' 은 확룔론적 프로그램과 Infer.NET 의 기본 개념을 다루고 있습니다.
 <br>
@@ -56,9 +58,9 @@ Version 1.2 – October 2018
 **시나리오** 문서에서 다루는 모든 애플리케이션은 다음의 시나리오에 기반하고 있습니다.
 
 - 당신과 여러 동료들은 매일 자전거로 출근을 합니다.
-- 개개인이 매일 자전거로 이동하는 시간은 날마다 다르며 불확실 합니다.
-- 이동시간의 불확실성은 확률분포로 표현될수 있습니다. 확률분포는 이동시간의 평균(average)과 평균이 얼마나 다른지에 의해 정의됩니다.
-- application 은 여러번의 이동시간 관찰을 통해서 확률분포를 학습한후, 습득된 지식을 이용해서 미래의 이동시간을 예측할것 입니다.
+- 개개인이 매일 자전거로 이동하는데 걸리는 시간은 날마다 다르며 불확실 합니다.
+- 이동시간의 불확실성은 확률분포로 표현될수 있습니다. 확률분포는 이동시간의 평균(average)과 평균이 매일 얼마나 다른지에 의해 정의됩니다.
+- 애플리케이션은 여러날 동안의 이동시간 관찰을 통해서 확률분포를 학습한후, 습득된 지식을 이용해서 미래의 이동시간을 예측할것 입니다.
 
 **예제** 예제를 통해 다음과 같은 애플리케이션을 다룹니다.
 
@@ -78,6 +80,7 @@ RunCyclingTime1 ~ RunCyclingTime5 로 이름지어진 5개의 static method 들�
 CyclingTime1 의 Infer.NET 모델은 RunCyclingSamples.cs 에 구현되어 있습니다. 나머지 4개의 예제에서는 개별적인 클라스 CyclingTime2.cs ~ CyclingTime5.cs 파일에 모델이 구현되었습니다. 
 
 <br>
+
 Infer.NET 애플리케이션의 빌드와 실행에 관한 일반적인 설명은 Appendix C를 참조하십시오.
 <br>
 <br>
@@ -112,9 +115,17 @@ Infer.NET 애플리케이션의 빌드와 실행에 관한 일반적인 설명�
 <br>
 
 ## **모델 만들기**
+<br>
+Infer.NET 애플리케이션은 확률론적 모델(probabilistic model)을 중심으로 구축되었습니다. 확률론적 모델은 확률변수들(random variables)과 이들이 관계되는 방식을 정의합니다.  
+<br>
+<br>
 
+확률변수(random variable)는 본질적으로 **double** 또는 **int** 같은 표준 타입에서 확장된 것이며, 불확실한 값(uncertain values)을 가질 수 있습니다. Infer.NET 에서 확률변수는 **Variable\<T\>** 클래스(class)의 인스턴스(instance)로 표현되며 이 클래스는 **Microsoft.ML.Probabilistic.Models** 네임스페이스(namespace) 에 속해 있습니다. 여기에서 **T** 는 변수(variable)의 도메인 타입(domain type) 을 나타냅니다.<br>
 
+- 이산확률변수(Discrete random variables) 는 **bool** 또는 **int** 와 같은 도메인 타입처럼 정해진 특정 값들의 가능한 집합에서 그 값을 취할 수 있습니다.
+- 연속확률변수(Continuous random variables) 는 **double** 같은 도메인 타입처럼 가능한 값들의 범위를 그 값으로 취할수 있습니다.<br>
 
+확률변수는 *확률분포 (probability distribution)* 로 정의되며 확률분포에서의 확률을 변수의 가능한 값으로 할당합니다. (probability distribution 은 일반적으로 *distribution* 으로 약칭됩니다). 확률변수의 값이 관측되기 이전에는 변수 값에 대한 이해를 나타내는 *사전분포 (prior distribution)* 로 확률변수를 정의합니다. (prior distribution 은 일반적으로 *prior*로 약칭됩니다).
 
 
 
