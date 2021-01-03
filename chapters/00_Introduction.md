@@ -127,13 +127,19 @@ Infer.NET 애플리케이션은 확률론적 모델(probabilistic model)을 중�
 
 확률변수는 *확률분포 (probability distribution)* 로 정의되며 확률분포에서의 확률을 변수의 가능한 값으로 할당합니다. (probability distribution 은 일반적으로 *distribution* 으로 약칭됩니다). 확률변수의 값이 관측되기 이전에는 변수 값에 대한 이해를 나타내는 *사전분포 (prior distribution)* 로 확률변수를 정의합니다. (prior distribution 은 일반적으로 *prior*로 약칭됩니다).
 
+<br>
 
+|             |
+| ----------- | 
+| <br > 확률변수는 최대 세 단계를 거쳐서 만들어질 수 있습니다. 예를 들면: <br ><br > 1. C# 선언(declaration): Variable\<bool\> x;<br><br >2. C# 정의(definition): x = Variable\<bool\>.New();<br><br >3. 통계적 또는 모델 정의: x = Variable\<bool\>.Random(someDist);<br ><br >통계적 추론의 언어에서 "정의(definition)" 또는 "정의한다(define)" 는 용어는 변수의 분포를 가르킬때 사용되며 이 문서도 이 방식을 따릅니다. 하지만 2단계와 3단계가 만약 별도의 명령문(statements)인 경우, 3단계에 대해 "통계적 정의" 또는 "통계적으로 정의한다"라는 표현을 사용하여 구분을 명확히 합니다.<br><br> 
+|             | 
 
+<br>
+확률변수들 사이의 관계는 다양한 방식으로 정의될 수 있으며, 이 문서 후반부에서 다루도록 하겠습니다. 
+<br>
+<br>
 
+## **확률변수 관측**
+<br>
 
-
-
-
-
-
-
+이 시점에서 모델을 통해 계산을 수행할 수 있지만 대부분 그렇게 흥미롭지는 않으며 단순히 선택한 사전확률 값들이 계산 결과로 반영됩니다. 무엇인가 새로운 것을 학습하기 위해서는 모델에 있는 한개 이상의 확률변수를 관측해야 하며, 이것은 관측 값들을 **ObservedValue** property 에 할당(assign)함으로써 이루어집니다. 관측이 된 후에 변수는 더 이상 확률변수가 아니며, 사실상 고정된 값을 가진 표준 타입(standard types)이 됩니다. 
